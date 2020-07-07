@@ -122,15 +122,16 @@ namespace TechJobsConsole
         {
             if (someJobs.Count != 0)
             {
-                string[] headers = { "name", "employer", "location", "position type", "core competency" };
+                //string[] headers = { "name", "employer", "location", "position type", "core competency" };
                 foreach (Dictionary<string, string> job in someJobs)
                 {
                     Console.WriteLine("*****");
-                    foreach (string key in headers)
+                    foreach (string key in job.Keys)
                     {
                         Console.WriteLine(key + ": " + job[key]);
                     }
                     Console.WriteLine("*****\n");
+                    Console.WriteLine(someJobs.Count + " items printed");
                 }
             } else
             {

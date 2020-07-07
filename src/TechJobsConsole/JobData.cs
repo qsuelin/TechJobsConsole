@@ -58,6 +58,7 @@ namespace TechJobsConsole
 
                 if (columnValue.ToLower().Contains(value.ToLower()))
                 {
+
                     jobs.Add(row);
                 }
             }
@@ -82,7 +83,7 @@ namespace TechJobsConsole
                     if (eachValue.ToLower().Contains(value.ToLower()))
                     {
                         jobs.Add(row);
-                        continue;
+                        break;
                     }
                 }
             }
