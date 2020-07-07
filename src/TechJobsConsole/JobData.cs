@@ -24,18 +24,18 @@ namespace TechJobsConsole
         {
             LoadData();
 
-            List<string> values = new List<string>();
+            List<string> resultList = new List<string>();
 
             foreach (Dictionary<string, string> job in AllJobs)
             {
-                string aValue = job[column];
+                string columnValue = job[column];
 
-                if (!values.Contains(aValue))
+                if (!resultList.Contains(columnValue.ToLower()))
                 {
-                    values.Add(aValue);
+                    resultList.Add(columnValue);
                 }
             }
-            return values;
+            return resultList;
         }
 
         public static List<Dictionary<string, string>> FindByColumnAndValue(string column, string value)
@@ -47,9 +47,9 @@ namespace TechJobsConsole
 
             foreach (Dictionary<string, string> row in AllJobs)
             {
-                string aValue = row[column];
+                string columnValue = row[column];
 
-                if (aValue.Contains(value))
+                if (columnValue.ToLower().Contains(value.ToLower()))
                 {
                     jobs.Add(row);
                 }
@@ -57,6 +57,31 @@ namespace TechJobsConsole
 
             return jobs;
         }
+
+        /* 
+         * Search for a string within each of the columns 
+         */
+        public static List<Dictionary<string, string>> FindByValue(string value)
+        {
+            LoadData();
+
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+
+            foreach (Dictionary<string, string> row in AllJobs)
+            {
+                foreach (string eachValue in row.Values)
+                {
+                    if (eachValue.ToLower().Contains(value.ToLower()))
+                    {
+                        jobs.Add(row);
+                        continue;
+                    }
+                }
+            }
+
+            return jobs;
+        }
+
 
         /*
          * Load and parse data from job_data.csv
