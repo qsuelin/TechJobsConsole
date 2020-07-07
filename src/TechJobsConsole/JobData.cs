@@ -13,7 +13,9 @@ namespace TechJobsConsole
         public static List<Dictionary<string, string>> FindAll()
         {
             LoadData();
-            return AllJobs;
+            List<Dictionary<string, string>> results = new List<Dictionary<string, string>>();
+            results.AddRange(AllJobs);
+            return results;
         }
 
         /*
@@ -30,13 +32,18 @@ namespace TechJobsConsole
             {
                 string columnValue = job[column];
 
-                if (!resultList.Contains(columnValue.ToLower()))
+                if (!resultList.ConvertAll(d=>d.ToLower()).Contains(columnValue.ToLower()))
                 {
                     resultList.Add(columnValue);
                 }
             }
             return resultList;
         }
+
+        /* 
+         * Given a Column and value, return results has the value in the given column,
+         * case-insensitive
+         */
 
         public static List<Dictionary<string, string>> FindByColumnAndValue(string column, string value)
         {
@@ -60,6 +67,7 @@ namespace TechJobsConsole
 
         /* 
          * Search for a string within each of the columns 
+         * case-insensitive
          */
         public static List<Dictionary<string, string>> FindByValue(string value)
         {
